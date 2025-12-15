@@ -35,8 +35,8 @@ services:
 
   api:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: napthe247_api
     restart: always
     environment:
@@ -46,6 +46,7 @@ services:
       REDIS_PORT: 6379
       JWT_SECRET: ${JWT_SECRET:-super_secure_secret}
       PORT: 4000
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
     ports:
       - "4000:4000"
     depends_on:
@@ -64,6 +65,8 @@ services:
     restart: always
     ports:
       - "3000:80"
+    environment:
+      - VITE_API_URL=/api/v1
     depends_on:
       - api
     networks:

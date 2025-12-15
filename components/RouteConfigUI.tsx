@@ -149,11 +149,11 @@ export const RouteMatrix: React.FC<RouteMatrixProps> = ({
                                 const connName = relevantConnections.find(c => c.id === connId)?.name || (connId ? 'Unknown' : '-');
 
                                 return (
-                                    <td key={d} className={`p-1 border-r border-b border-gray-200 relative ${isChanged ? 'bg-yellow-50' : ''}`}>
+                                    <td key={d} className={`p-1 border-r border-b border-gray-200 relative ${isChanged ? 'bg-yellow-50' : !connId ? 'bg-red-50' : ''}`}>
                                         {product ? (
                                             editing ? (
                                                 <select 
-                                                    className={`w-full text-xs p-1 border-none focus:ring-0 bg-transparent ${!connId ? 'text-red-500' : ''}`}
+                                                    className={`w-full text-xs p-1 border-none focus:ring-0 bg-transparent ${!connId ? 'text-red-500 font-bold' : ''}`}
                                                     value={connId || ''}
                                                     onChange={(e) => handleSelectChange(product.id, e.target.value)}
                                                 >
@@ -163,7 +163,7 @@ export const RouteMatrix: React.FC<RouteMatrixProps> = ({
                                                     ))}
                                                 </select>
                                             ) : (
-                                                <span className={`text-xs ${!connId ? 'text-red-300' : 'text-gray-600'}`}>
+                                                <span className={`text-xs ${!connId ? 'text-red-300 font-bold' : 'text-gray-600'}`}>
                                                     {connName}
                                                 </span>
                                             )
